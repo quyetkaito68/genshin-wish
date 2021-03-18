@@ -1,1 +1,3 @@
 "# genshin-wish" 
+
+learn how to use github: branch, rule...
