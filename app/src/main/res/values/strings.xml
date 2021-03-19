@@ -4,4 +4,6 @@
     <string name="money">Tiền dự kiến: </string>
     <string name="wishx1">Wish x1</string>
     <string name="tenWish">Wish x10</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
