@@ -9,6 +9,8 @@ import android.util.Log
 import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.viewpager.widget.ViewPager
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.customview.customView
 import com.example.genshinwish.databinding.ActivityMainBinding
 import com.example.genshinwish.fragments.GanyuFragment
 import com.example.genshinwish.fragments.HutaoFragment
@@ -71,8 +73,12 @@ class MainActivity : AppCompatActivity() {
         binding.listView.adapter = arrayAdapter
 
         //sort 4-5 sao lên dau tien
-        val intent = Intent(this, ResultActivity::class.java)
-        startActivity(intent)
+        //show dialog animation
+        val dialog = MaterialDialog(this)
+            .noAutoDismiss()
+            .customView(R.layout.dialog_result)
+        dialog.show()
+
 
     }
 
