@@ -20,8 +20,7 @@ class Wish : WishInterface {
         fourStarInit = Random.nextInt(3)
     }
 
-    fun getChar(): Int {
-
+    fun getStar(): Int {
         val key = Random.nextInt(999)
         tempFive++
         tempFour++
@@ -42,7 +41,7 @@ class Wish : WishInterface {
     }
 
     override fun wishX1(): Int {
-        var key2: Int = getChar()
+        var key2: Int = getStar()
         when (key2) {
             4 -> {
                 //kiem tra bao hiem
@@ -56,8 +55,18 @@ class Wish : WishInterface {
             5 -> {
 //                if (guaranteeFiveStar==false){
 //                    //random 5sao
+//                        val x= Random.nextInt(2)
+//                    if (x==1){
+//                        //trả về nhân vật rate up. lưu trạng thái là không lệch
+//                    }else{
+//                        //random lệch rate
+//                        guaranteeFiveStar=true //lưu bảo hiểm
+//                    }
+//
 //                }else{
 //                    //random 5sao rateup
+//                    //neu la banner nhan vat=> trả về luôn nhân vật
+//                    //nếu là vũ khí => random 2.
 //                }
                 return 5
             }
@@ -70,7 +79,7 @@ class Wish : WishInterface {
         var key3: Int
         var list = ArrayList<Int>()
         for (i in 1..10) {
-            key3 = getChar()
+            key3 = getStar()
             when (key3) {
                 4 -> {
                     list.add(4)

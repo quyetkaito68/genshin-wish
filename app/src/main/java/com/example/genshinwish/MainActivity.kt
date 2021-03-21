@@ -1,6 +1,7 @@
 package com.example.genshinwish
 
 import android.app.ProgressDialog
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -43,11 +44,13 @@ class MainActivity : AppCompatActivity() {
         binding.btnSingleWish.setOnClickListener {
             listResult.add(wish.wishX1())
             totalWish++
+            totalMoney+=160
             updateResult()
         }
 
         binding.btnTenWish.setOnClickListener {
             totalWish+=10
+            totalMoney+=1600
             listResult.addAll(wish.wishX10())
             updateResult()
         }
@@ -57,6 +60,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateResult() {
         binding.tvCounterWish.text = totalWish.toString()
+        binding.tvCounterMoney.text = totalMoney.toString()
         var listSort = listResult
         listSort.sortDescending() //sap xep giam dan 5-4-3
         val arrayAdapter: ArrayAdapter<Int> = ArrayAdapter(
@@ -65,8 +69,10 @@ class MainActivity : AppCompatActivity() {
             listSort
         )
         binding.listView.adapter = arrayAdapter
-        //money
+
         //sort 4-5 sao lên dau tien
+        val intent = Intent(this, ResultActivity::class.java)
+        startActivity(intent)
 
     }
 
