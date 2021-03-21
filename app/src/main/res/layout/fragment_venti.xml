@@ -19,20 +19,6 @@
             android:layout_height="200dp"
             android:src="@drawable/banner_venti" />
 
-        <TextView
-            android:id="@+id/wishCounter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/imgv_banner"
-            android:text="@string/total_wish" />
-
-        <TextView
-            android:id="@+id/tv_money"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/wishCounter"
-            android:text="@string/money" />
-
 
     </RelativeLayout>
 
