@@ -4,6 +4,9 @@
     <string name="money">Tiền dự kiến: </string>
     <string name="wishx1">Wish x1</string>
     <string name="tenWish">Wish x10</string>
+    <string name="result_demo">kết quả hiễn thị ở đây\ntrên nhiều dòng\n như thế này\n này \n\n
+        chào mừng\n các bạn\n đến với \n genshin wish\n nơi các bạn giải tỏa\n nỗi buồn khi gacha\n
+        </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
