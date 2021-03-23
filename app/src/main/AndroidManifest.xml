@@ -9,6 +9,8 @@
         android:roundIcon="@mipmap/ic_paimon_laucher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GenshinWish">
+        <activity android:name=".SecondActivity"></activity>
+        <activity android:name=".ResultActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
