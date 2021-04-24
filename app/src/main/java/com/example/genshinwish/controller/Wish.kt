@@ -56,30 +56,9 @@ class Wish : WishInterface {
         var key2: Int = getStar()
         when (key2) {
             4 -> {
-                //kiem tra bao hiem
-//                if (guaranteeFourStar==false){
-//                    //random 4 sao
-//                }else{
-//                    //random 4sao rateup
-//                }
                 return 4
             }
             5 -> {
-//                if (guaranteeFiveStar==false){
-//                    //random 5sao
-//                        val x= Random.nextInt(2)
-//                    if (x==1){
-//                        //trả về nhân vật rate up. lưu trạng thái là không lệch
-//                    }else{
-//                        //random lệch rate
-//                        guaranteeFiveStar=true //lưu bảo hiểm
-//                    }
-//
-//                }else{
-//                    //random 5sao rateup
-//                    //neu la banner nhan vat=> trả về luôn nhân vật
-//                    //nếu là vũ khí => random 2.
-//                }
                 return 5
             }
             else -> return 3

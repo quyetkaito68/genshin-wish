@@ -12,11 +12,5 @@ class SecondActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_second)
-
-        var uriPath: String = "android.resource://" + packageName.toString() + "/"
-        var uri: Uri = Uri.parse(uriPath + R.raw.five_star_wish)
-        binding.videoView.setVideoURI(uri)
-        binding.videoView.start()
-
     }
 }

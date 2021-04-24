@@ -113,24 +113,6 @@ class MainActivity : AppCompatActivity() {
         binding.listView.adapter = arrayAdapter
         binding.listView.isVisible = true
 
-        //animation
-//        if (animation == true) {
-//            val dialog = MaterialDialog(this)
-//                .noAutoDismiss()
-//                .customView(R.layout.dialog_result)
-//            dialog.show()
-        //
-
-        //
-        //Handler().postDelayed({dialog.dismiss()},5000)
-        //dialog setting
-//            val dialog2 = MaterialDialog(this)
-//                .noAutoDismiss()
-//                .customView(R.layout.dialog_setting)
-//            dialog2.show()
-//        }
-
-
     }
 
     private fun playAnimation(list: ArrayList<Int>) {
