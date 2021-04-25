@@ -19,5 +19,6 @@ class Mp3Service: Service() {
     override fun onDestroy() {
         super.onDestroy()
         Log.e("quyetkaito","Service is destroyed")
+        Log.e("quyetkaito","test create branch local, push remote")
     }
 }
