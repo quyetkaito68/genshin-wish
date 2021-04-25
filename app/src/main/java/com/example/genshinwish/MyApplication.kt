@@ -20,6 +20,7 @@ class MyApplication: Application() {
     private fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
             val notificationChannel = NotificationChannel(CHANNEL_ID,"Channel Service Example",NotificationManager.IMPORTANCE_DEFAULT)
+            notificationChannel.setSound(null,null)
             val manager:NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE)as NotificationManager
             manager.createNotificationChannel(notificationChannel)
         }
