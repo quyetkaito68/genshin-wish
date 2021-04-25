@@ -15,7 +15,7 @@
     <LinearLayout
         android:id="@+id/song_infor"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="100dp"
         android:layout_below="@+id/img_song"
         android:orientation="vertical">
         <TextView

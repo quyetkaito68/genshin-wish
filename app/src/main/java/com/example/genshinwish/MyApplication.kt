@@ -9,20 +9,22 @@ import androidx.core.content.getSystemService
 
 class MyApplication: Application() {
     companion object{
-        const val CHANNEL_ID = "my_channel_id_1"
+        var CHANNEL_ID = "my_channel_id_1"
     }
 
     override fun onCreate() {
         super.onCreate()
-        createNotificationChannel()
+        createChannelNotification()
     }
 
-    private fun createNotificationChannel() {
+    private fun createChannelNotification() {
         if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
             val notificationChannel = NotificationChannel(CHANNEL_ID,"Channel Service Example",NotificationManager.IMPORTANCE_DEFAULT)
             notificationChannel.setSound(null,null)
-            val manager:NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE)as NotificationManager
-            manager.createNotificationChannel(notificationChannel)
+            val manager:NotificationManager = getSystemService(NotificationManager::class.java)
+            if(manager!=null){
+                manager.createNotificationChannel(notificationChannel)
+            }
         }
     }
 }

@@ -35,9 +35,19 @@ class Mp3Service: Service() {
             val song = bundle.getSerializable("object_song") as Song
             Log.e("quyetkaito",song.title)
             sendNotification(song)
+            //sendNotification2()
             startMusic(song)
         }
         return START_NOT_STICKY
+    }
+
+    private fun sendNotification2() {
+        val notification: Notification = NotificationCompat.Builder(this, CHANNEL_ID)
+            .setContentTitle("test")
+            .setContentText("ahihi")
+            .setSmallIcon(R.drawable.razor)
+            .build()
+        startForeground(1,notification)
     }
 
     private fun startMusic(song: Song) {
@@ -64,6 +74,7 @@ class Mp3Service: Service() {
 
         val notify:Notification = NotificationCompat.Builder(this,CHANNEL_ID)
             .setContentIntent(pendingIntent)
+            .setSmallIcon(R.drawable.razor)
             .setCustomContentView(remoteViews)
             .setSound(null)
             .build()
