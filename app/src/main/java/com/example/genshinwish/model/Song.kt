@@ -1,3 +1,5 @@
 package com.example.genshinwish.model
 
-data class Song()
+import java.io.Serializable
+
+data class Song(val title: String, val singer: String, val image: Int, val resource: Int): Serializable
