@@ -84,7 +84,10 @@ class MainActivity : AppCompatActivity() {
             listResultTemp.addAll(listTemp)
             updateResult()
         }
-
+        binding.btnMusic.setOnClickListener{
+            val intent = Intent(this, SecondActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 

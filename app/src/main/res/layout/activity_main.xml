@@ -83,6 +83,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="@string/settings" />
+            <Button
+                android:id="@+id/btn_Music"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="MP3"/>
         </LinearLayout>
 
         <ListView
