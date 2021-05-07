@@ -19,6 +19,7 @@
             </intent-filter>
         </activity>
         <service android:name=".service.Mp3Service"/>
+        <receiver android:name=".MyReceiver"/>
     </application>
 
 </manifest>
