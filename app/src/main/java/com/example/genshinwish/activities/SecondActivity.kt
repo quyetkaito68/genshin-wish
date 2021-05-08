@@ -1,12 +1,13 @@
-package com.example.genshinwish
+package com.example.genshinwish.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import com.example.genshinwish.R
 import com.example.genshinwish.databinding.ActivitySecondBinding
-import com.example.genshinwish.model.Song
-import com.example.genshinwish.service.Mp3Service
+import com.example.genshinwish.models.Song
+import com.example.genshinwish.notification.Mp3Service
 
 class SecondActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySecondBinding
@@ -31,7 +32,9 @@ class SecondActivity : AppCompatActivity() {
     private fun clickStartService() {
         val intent = Intent(this, Mp3Service::class.java)
         val bundle = Bundle()
-        val song = Song("Genshin Impact Battle Song","Paimon",R.drawable.razor,R.raw.battle_paimon)
+        val song = Song("Genshin Impact Battle Song","Paimon",
+            R.drawable.razor,
+            R.raw.battle_paimon)
         bundle.putSerializable("object_song",song)
         intent.putExtra("Bundle",bundle)
         startService(intent)

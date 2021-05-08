@@ -1,29 +1,22 @@
-package com.example.genshinwish
+package com.example.genshinwish.activities
 
 import android.app.ProgressDialog
 import android.content.Intent
 import android.net.Uri
-import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.View
-import android.view.Window
 import android.widget.ArrayAdapter
-import android.widget.VideoView
-import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.viewpager.widget.ViewPager
-import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.customview.customView
+import com.example.genshinwish.R
 import com.example.genshinwish.databinding.ActivityMainBinding
 import com.example.genshinwish.fragments.GanyuFragment
 import com.example.genshinwish.fragments.HutaoFragment
 import com.example.genshinwish.fragments.VentiFragment
 import com.example.genshinwish.fragments.adapters.ViewPagerAdapter
 import com.example.genshinwish.controller.Wish
-import com.example.genshinwish.dialog.SettingDialog
 import com.google.android.material.tabs.TabLayout
 
 class MainActivity : AppCompatActivity() {
@@ -114,7 +107,7 @@ class MainActivity : AppCompatActivity() {
             listItem
         )
         binding.listView.adapter = arrayAdapter
-        binding.listView.isVisible = true
+        binding.listView.visibility = View.VISIBLE
 
         //animation
 //        if (animation == true) {
@@ -180,7 +173,7 @@ class MainActivity : AppCompatActivity() {
         binding.tvCounterWish.text = totalWish.toString() //de mot bien luu total wish->toString
         binding.tvCounterMoney.text = totalMoney.toString() //mot bien luu tien ->toString
         listResult.clear()        //listView reset
-        binding.listView.isVisible = false
+        binding.listView.visibility = View.GONE
         binding.imvVentii.visibility = View.GONE
         wish.resetValue()         //reset cac gia tri random
     }

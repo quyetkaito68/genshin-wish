@@ -1,4 +1,4 @@
-package com.example.genshinwish.service
+package com.example.genshinwish.notification
 
 import android.app.Notification
 import android.app.PendingIntent
@@ -16,8 +16,8 @@ import androidx.core.app.NotificationCompat
 import com.example.genshinwish.MyApplication.Companion.CHANNEL_ID
 import com.example.genshinwish.MyReceiver
 import com.example.genshinwish.R
-import com.example.genshinwish.SecondActivity
-import com.example.genshinwish.model.Song
+import com.example.genshinwish.activities.SecondActivity
+import com.example.genshinwish.models.Song
 
 class Mp3Service : Service() {
 

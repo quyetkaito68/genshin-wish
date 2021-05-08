@@ -1,4 +1,4 @@
-package com.example.genshinwish.model
+package com.example.genshinwish.models
 
 import java.io.Serializable
 

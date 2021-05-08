@@ -1,4 +1,4 @@
-package com.example.genshinwish.model
+package com.example.genshinwish.models
 
 class Character(charName: String, charId: String, charRateUp: Boolean, charStar: Int) : MyItem() {
     private var name: String = ""

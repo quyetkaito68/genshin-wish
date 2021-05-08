@@ -1,4 +1,4 @@
-package com.example.genshinwish.model
+package com.example.genshinwish.models
 
 class Weapon(weapName: String, weapId: Int, weapRateUp: Boolean): MyItem() {
     private var name: String = ""
