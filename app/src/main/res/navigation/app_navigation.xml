@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/app_navigation"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.genshinwish.fragments.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout = "@layout/fragment_home"/>
+    <fragment
+        android:id="@+id/musicFragment"
+        android:name="com.example.genshinwish.fragments.MusicFragment"
+        android:label="MusicFragment"
+        tools:layout = "@layout/fragment_music"/>
+    <fragment
+        android:id="@+id/publicFragment"
+        android:name="com.example.genshinwish.fragments.PublicFragment"
+        android:label="PublicFragment"
+        tools:layout = "@layout/fragment_public"/>
+</navigation>

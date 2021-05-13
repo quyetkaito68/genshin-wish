@@ -10,4 +10,10 @@
         </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="action_home">Home</string>
+    <string name="action_music">Music</string>
+    <string name="action_public">Entertainment</string>
+    <string name="home_fragment">This is Home Fragment</string>
+    <string name="music_fragment">This is music fragment</string>
+    <string name="public_fragment">This is public Fragment</string>
 </resources>

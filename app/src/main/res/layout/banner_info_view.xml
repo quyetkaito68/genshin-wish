@@ -10,10 +10,5 @@
         android:layout_height="200dp"
         android:src="@drawable/chongyun"
         android:layout_gravity="center_vertical"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/rv_text"
-        android:text="ghjk"/>
 
 </LinearLayout>
