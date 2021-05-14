@@ -15,29 +15,29 @@ class SecondActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_second)
-        binding.btnStartService.setOnClickListener{
-            clickStartService()
-        }
-        binding.btnStopService.setOnClickListener{
-            clickStopService()
-        }
+//        binding.btnStartService.setOnClickListener{
+//            clickStartService()
+//        }
+//        binding.btnStopService.setOnClickListener{
+//            clickStopService()
+//        }
 
     }
 
-    private fun clickStopService() {
-        val intent = Intent(this, Mp3Service::class.java)
-        stopService(intent)
-    }
-
-    private fun clickStartService() {
-        val intent = Intent(this, Mp3Service::class.java)
-        val bundle = Bundle()
-        val song = Song("Genshin Impact Battle Song","Paimon",
-            R.drawable.razor,
-            R.raw.battle_paimon)
-        bundle.putSerializable("object_song",song)
-        intent.putExtra("Bundle",bundle)
-        startService(intent)
-    }
+//    private fun clickStopService() {
+//        val intent = Intent(this, Mp3Service::class.java)
+//        stopService(intent)
+//    }
+//
+//    private fun clickStartService() {
+//        val intent = Intent(this, Mp3Service::class.java)
+//        val bundle = Bundle()
+//        val song = Song("Genshin Impact Battle Song","Paimon",
+//            R.drawable.razor,
+//            R.raw.battle_paimon)
+//        bundle.putSerializable("object_song",song)
+//        intent.putExtra("Bundle",bundle)
+//        startService(intent)
+//    }
 
 }
