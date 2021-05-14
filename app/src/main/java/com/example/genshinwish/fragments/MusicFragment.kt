@@ -11,6 +11,7 @@ import com.example.genshinwish.R
 import com.example.genshinwish.databinding.FragmentMusicBinding
 import com.example.genshinwish.models.Song
 import com.example.genshinwish.notification.Mp3Service
+import kotlinx.android.synthetic.main.fragment_music.*
 
 class MusicFragment : Fragment() {
    private lateinit var binding : FragmentMusicBinding
@@ -26,9 +27,11 @@ class MusicFragment : Fragment() {
         binding = FragmentMusicBinding.inflate(inflater)
         binding.btnStartService.setOnClickListener {
             clickStartService()
+            btn_start_service.isEnabled = false
         }
         binding.btnStopService.setOnClickListener {
             clickStopService()
+            btn_start_service.isEnabled = true
         }
         return binding.root
     }
