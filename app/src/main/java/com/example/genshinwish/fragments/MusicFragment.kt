@@ -17,13 +17,6 @@ class MusicFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(requireActivity(), R.layout.fragment_music)
-        binding.btnStartService.setOnClickListener {
-            clickStartService()
-        }
-        binding.btnStopService.setOnClickListener {
-            clickStopService()
-        }
     }
 
     override fun onCreateView(
@@ -31,6 +24,12 @@ class MusicFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         binding = FragmentMusicBinding.inflate(inflater)
+        binding.btnStartService.setOnClickListener {
+            clickStartService()
+        }
+        binding.btnStopService.setOnClickListener {
+            clickStopService()
+        }
         return binding.root
     }
 
