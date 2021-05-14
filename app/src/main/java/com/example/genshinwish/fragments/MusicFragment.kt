@@ -5,8 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.genshinwish.R
-import com.example.genshinwish.databinding.FragmentHomeBinding
 import com.example.genshinwish.databinding.FragmentMusicBinding
 
 
