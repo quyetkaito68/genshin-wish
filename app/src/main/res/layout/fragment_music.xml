@@ -10,7 +10,7 @@
             android:id="@+id/img_song"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:src="@drawable/hutao_banner"
+            android:src="@drawable/chongyun"
             />
         <LinearLayout
             android:id="@+id/song_infor"
