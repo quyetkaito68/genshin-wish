@@ -14,6 +14,11 @@ import com.example.genshinwish.notification.Mp3Service
 import kotlinx.android.synthetic.main.fragment_music.*
 
 class MusicFragment : Fragment() {
+    companion object{
+        fun newInstance(): MusicFragment{
+            return MusicFragment()
+        }
+    }
    private lateinit var binding : FragmentMusicBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

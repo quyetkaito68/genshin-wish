@@ -22,6 +22,12 @@ import com.google.android.material.tabs.TabLayout
 
 
 class HomeFragment : Fragment() {
+
+    companion object{
+        fun newInstance(): HomeFragment{
+            return HomeFragment()
+        }
+    }
     private lateinit var binding : FragmentHomeBinding
     private var wish: Wish = Wish()
     private var totalWish: Int = 0

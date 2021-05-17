@@ -9,6 +9,11 @@ import com.example.genshinwish.databinding.FragmentPublicBinding
 
 
 class PublicFragment : Fragment() {
+    companion object{
+        fun newInstance(): PublicFragment{
+            return PublicFragment()
+        }
+    }
     private lateinit var binding: FragmentPublicBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
