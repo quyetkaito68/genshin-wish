@@ -39,27 +39,28 @@ class MainActivity : AppCompatActivity() {
 //        //View Pager
         setUpTabs()
         setBottomNavigation()
-      // setViewPagerListener()
+        setViewPagerListener()
 
     }
 
     private fun setViewPagerListener() {
-        viewPager.addOnPageChangeListener(object: ViewPager.OnPageChangeListener{
+        viewPager?.addOnPageChangeListener(object: ViewPager.OnPageChangeListener{
 
             override fun onPageScrolled(
                 position: Int,
                 positionOffset: Float,
                 positionOffsetPixels: Int,
             ) {
-                TODO("Not yet implemented")
+                Log.e("quyetkaito","onPageScrolled")
             }
 
             override fun onPageSelected(position: Int) {
+                Log.e("quyetkaito","onPageSelected")
                 nav_bottom.menu.getItem(position).setChecked(true)
             }
 
             override fun onPageScrollStateChanged(state: Int) {
-                TODO("Not yet implemented")
+                Log.e("quyetkaito","onPageScrollStateChanged")
             }
 
         })
