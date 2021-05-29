@@ -55,9 +55,19 @@
         <ListView
             android:id="@+id/listMusic"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="200dp"
             android:layout_below="@id/btn_service"
+            android:visibility="gone"
+            tools:listitem="@layout/layout_music_component"
             />
+        <androidx.recyclerview.widget.RecyclerView
+            android:visibility="visible"
+            android:id="@+id/rv_song"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btn_service"
+            tools:listitem="@layout/layout_music_component"/>
+
 
         <RelativeLayout
             android:layout_width="match_parent"

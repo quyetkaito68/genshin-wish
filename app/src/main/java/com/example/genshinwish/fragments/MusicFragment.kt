@@ -2,6 +2,7 @@ package com.example.genshinwish.fragments
 
 import android.Manifest
 import android.content.ContentResolver
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -15,11 +16,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.BaseAdapter
+import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.genshinwish.R
+import com.example.genshinwish.SongRecyclerViewAdapter
 import com.example.genshinwish.databinding.FragmentMusicBinding
 import com.example.genshinwish.models.Song
 import com.example.genshinwish.models.SongInfo
@@ -39,16 +44,8 @@ class MusicFragment : Fragment() {
    var listSongs= ArrayList<SongInfo>()
    var musicAdapter: MySongAdapter?=null
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (ActivityCompat.checkSelfPermission(requireContext(),Manifest.permission.READ_EXTERNAL_STORAGE)!=PackageManager.PERMISSION_GRANTED){
-            Log.e("quyetkaito","chua duoc")
-            ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),111)
-        }else{
-            Log.e("quyetkaito","Permission granted")
-            //getMusic()
-        }
     }
 
     override fun onCreateView(
@@ -64,6 +61,14 @@ class MusicFragment : Fragment() {
             clickStopService()
             btn_start_service.isEnabled = true
         }
+        if (ActivityCompat.checkSelfPermission(requireContext(),Manifest.permission.READ_EXTERNAL_STORAGE)!=PackageManager.PERMISSION_GRANTED){
+            Log.e("quyetkaito","chua duoc")
+            ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),111)
+        }else{
+            Log.e("quyetkaito","Permission granted")
+            getMusic()
+        }
+
         return binding.root
     }
 
@@ -86,17 +91,30 @@ class MusicFragment : Fragment() {
     private fun getMusic(){
         val songUri:Uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
         var selection: String = MediaStore.Audio.Media.IS_MUSIC +"!=0"
-        var rs = requireActivity()?.contentResolver.query(songUri,null,selection,null,null)
-        if (rs!=null){
-            while(rs!!.moveToNext()){
-                var url = rs!!.getString(rs!!.getColumnIndex(MediaStore.Audio.Media.DATA))
-                var author = rs!!.getString(rs!!.getColumnIndex(MediaStore.Audio.Media.ARTIST))
-                var title = rs!!.getString(rs!!.getColumnIndex(MediaStore.Audio.Media.DISPLAY_NAME))
-               listSongs.add(SongInfo(title,author,url))
-            }
+        var rs = activity?.contentResolver?.query(songUri,null,selection,null,null)
+        if (rs!=null && rs.moveToFirst()){
+            do {
+                var url = rs.getString(rs.getColumnIndex(MediaStore.Audio.Media.DATA))
+                Log.e("quyetkaito",url)
+                var author = rs.getString(rs.getColumnIndex(MediaStore.Audio.Media.ARTIST))
+                Log.e("quyetkaito",author)
+                var title = rs.getString(rs.getColumnIndex(MediaStore.Audio.Media.DISPLAY_NAME))
+                listSongs.add(SongInfo(title,author,url))
+                Log.e("quyetkaito",listSongs[0].Title.toString())
+            } while(rs.moveToNext())
         }
         musicAdapter = MySongAdapter(listSongs)
-        listMusic.adapter = musicAdapter
+        for (i in listSongs){
+            Log.e("quyetkaito",i.Title.toString())
+        }
+//        txt_song_name.text = listSongs[0].Title.toString()
+//        txt_singer.text = listSongs[0].Author
+//
+        binding.rvSong.adapter = SongRecyclerViewAdapter(listSongs)
+        binding.rvSong.layoutManager= LinearLayoutManager(context)
+        binding.rvSong.setHasFixedSize(true)
+        //listMusic.adapter = musicAdapter //==> không  chạy
+       // musicAdapter!!.notifyDataSetChanged()
 
     }
 //    private fun isPermissionGranted():Boolean{
@@ -126,6 +144,7 @@ class MusicFragment : Fragment() {
             }
         }
     }
+
 
 
     inner class MySongAdapter:BaseAdapter {
