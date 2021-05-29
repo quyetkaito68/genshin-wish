@@ -63,7 +63,7 @@ class MusicFragment : Fragment() {
         }
         if (ActivityCompat.checkSelfPermission(requireContext(),Manifest.permission.READ_EXTERNAL_STORAGE)!=PackageManager.PERMISSION_GRANTED){
             Log.e("quyetkaito","chua duoc")
-            ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),111)
+            requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),111)
         }else{
             Log.e("quyetkaito","Permission granted")
             getMusic()
@@ -138,10 +138,9 @@ class MusicFragment : Fragment() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if(requestCode== 111){
-            if (grantResults.contains(PackageManager.PERMISSION_GRANTED)){
-                getMusic()
-            }
+        if(requestCode== 111 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+            Log.e("quyetkaito","First Action when permission granted")
+            getMusic()
         }
     }
 
