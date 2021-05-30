@@ -1,144 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        android:layout_height="match_parent">
 
-
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appBarLayout"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            tools:context=".activities.MainActivity">
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabs"
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@id/nav_bottom"
+                android:layout_alignParentTop="true"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" >
+
+                <fragment
+                    android:id="@+id/hostFragment"
+                    android:name="androidx.navigation.fragment.NavHostFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:defaultNavHost="true"
+                    app:navGraph="@navigation/app_navigation" />
+            </androidx.viewpager.widget.ViewPager>
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/nav_bottom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:tabBackground="@color/white"
-                app:tabGravity="fill"
-                app:tabInlineLabel="true"
-                app:tabMode="fixed"
-                app:tabTextColor="@color/black"
+                android:layout_alignParentBottom="true"
+                android:background="@color/design_default_color_on_primary"
+                app:menu="@menu/menu_bottom" />
 
-                />
-        </com.google.android.material.appbar.AppBarLayout>
+        </RelativeLayout>
 
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/viewPager"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_below="@id/appBarLayout" />
-
-
-        <TextView
-            android:id="@+id/tv_total_wish"
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/navigation_view"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/viewPager"
-            android:text="@string/total_wish" />
-
-        <TextView
-            android:id="@+id/tv_total_money"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_total_wish"
-            android:text="@string/money" />
-
-        <TextView
-            android:id="@+id/tv_counter_wish"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/viewPager"
-            android:layout_toRightOf="@id/tv_total_wish"
-            android:text="0" />
-
-        <TextView
-            android:id="@+id/tv_counter_money"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_counter_wish"
-            android:layout_toRightOf="@id/tv_total_money"
-            android:text="0" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/viewPager"
-            android:layout_alignParentEnd="true"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btn_reset"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="reset" />
-
-            <Button
-                android:id="@+id/btn_setting"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="@string/settings" />
-            <Button
-                android:id="@+id/btn_Music"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="MP3"/>
-        </LinearLayout>
-
-        <ListView
-            android:id="@+id/listView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@id/wishComponent"
-            android:layout_below="@id/tv_counter_money" />
-
-        <LinearLayout
-            android:id="@+id/wishComponent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:orientation="horizontal"
-            android:padding="5dp">
-
-            <Button
-                android:id="@+id/btn_singleWish"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/wishx1" />
-
-            <Button
-                android:id="@+id/btn_tenWish"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="@string/tenWish" />
-        </LinearLayout>
-
-        <VideoView
-            android:id="@+id/videoAnimation"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginTop="300dp"
-            android:layout_marginBottom="60dp"
-            android:visibility="gone" />
-
-        <ImageView
-            android:id="@+id/imv_ventii"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginLeft="120dp"
-            android:layout_below="@id/videoAnimation"
-            android:layout_above="@id/wishComponent"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/ic_paimon_laucher"
-            android:visibility="gone" />
-
-
-    </RelativeLayout>
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            app:headerLayout="@layout/drawer_header"
+            app:menu="@menu/menu_bottom" />
+    </androidx.drawerlayout.widget.DrawerLayout>
 </layout>

@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".fragments.MusicFragment">
+
+        <ImageView
+            android:id="@+id/img_song"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+
+            android:src="@drawable/chongyun"
+            />
+        <SeekBar
+            android:id="@+id/seekbar_volume"
+            android:layout_width="15dp"
+            android:layout_height="wrap_content"
+            android:rotation="-90"
+            android:progress="50"
+            android:layout_toEndOf="@id/img_song"
+            android:layout_alignParentEnd="true"/>
+        <LinearLayout
+            android:id="@+id/song_infor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/img_song"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/txt_song_name"
+                android:layout_width="250dp"
+                android:layout_gravity="center"
+                android:maxLines="2"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:text="Tên bài hát hiển thị ở đây"/>
+            <TextView
+                android:id="@+id/txt_singer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tên ca sỹ"
+                android:textAlignment="center"/>
+        </LinearLayout>
+        <RelativeLayout
+            android:id="@+id/seekbarcontainner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_below="@id/song_infor"
+           >
+            <TextView
+                android:id="@+id/tv_time_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0:00"/>
+            <SeekBar
+                android:id="@+id/seekbar_progress"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/tv_time_start"
+                />
+            <TextView
+                android:id="@+id/tv_time_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/seekbar_progress"
+                android:text="99:99"/>
+
+        </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/btn_service"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/seekbarcontainner"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/btn_start_service"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/ic_play"
+                />
+            <Button
+                android:id="@+id/btn_stop_service"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+
+                android:background="@drawable/ic_close"
+                android:layout_marginLeft="10dp"/>
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/listMusic"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_below="@id/btn_service"
+            android:visibility="gone"
+            tools:listitem="@layout/layout_music_component"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:visibility="visible"
+            android:id="@+id/rv_song"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btn_service"
+            tools:listitem="@layout/layout_music_component"/>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:visibility="gone"
+            android:layout_alignParentBottom="true"
+            android:background="@color/cyan"
+            >
+
+            <ImageView
+                android:id="@+id/img_currentsong"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@drawable/razor" />
+
+            <LinearLayout
+                android:id="@+id/text_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/img_currentsong"
+                android:layout_toStartOf="@id/btn_play_or_pause"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_songname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tên bài hát"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tv_singer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="tên ca sỹ"
+                    android:textColor="#5E6A66"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/btn_play_or_pause"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@id/btn_close"
+                android:layout_marginRight="30dp"
+                android:src="@drawable/ic_pause"
+                />
+
+            <ImageView
+                android:id="@+id/btn_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/ic_close" />
+
+
+        </RelativeLayout>
+    </RelativeLayout>
+</layout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

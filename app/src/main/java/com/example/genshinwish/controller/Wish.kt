@@ -1,7 +1,6 @@
 package com.example.genshinwish.controller
 
-import com.example.genshinwish.model.Character
-import com.example.genshinwish.model.Weapon
+import com.example.genshinwish.models.Character
 import kotlin.random.Random
 
 class Wish : WishInterface {
@@ -99,7 +98,7 @@ class Wish : WishInterface {
         return list
     }
 
-    fun wishX1Char(): Character {
+    private fun wishX1Char(): Character {
         var key2: Int = getStar()
         var pos4: Int = 0
         var pos5: Int = 0

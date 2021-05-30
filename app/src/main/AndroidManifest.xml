@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.genshinwish">
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -10,16 +13,22 @@
         android:roundIcon="@mipmap/ic_paimon_laucher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GenshinWish">
-        <activity android:name=".SecondActivity"></activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".activities.SplashScreenActivity"
+            android:theme="@style/SplashscreenTheme">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name=".service.Mp3Service"/>
-        <receiver android:name=".MyReceiver"/>
+        <activity android:name=".activities.SecondActivity" />
+        <activity android:name=".activities.MainActivity">
+        </activity>
+
+        <service android:name=".notification.Mp3Service" />
+
+        <receiver android:name=".MyReceiver" />
     </application>
 
 </manifest>

@@ -3,7 +3,7 @@ package com.example.genshinwish
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import com.example.genshinwish.service.Mp3Service
+import com.example.genshinwish.notification.Mp3Service
 
 class MyReceiver: BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
