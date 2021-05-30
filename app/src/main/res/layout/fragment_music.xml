@@ -8,14 +8,23 @@
 
         <ImageView
             android:id="@+id/img_song"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+
             android:src="@drawable/chongyun"
             />
+        <SeekBar
+            android:id="@+id/seekbar_volume"
+            android:layout_width="15dp"
+            android:layout_height="wrap_content"
+            android:rotation="-90"
+            android:progress="50"
+            android:layout_toEndOf="@id/img_song"
+            android:layout_alignParentEnd="true"/>
         <LinearLayout
             android:id="@+id/song_infor"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/img_song"
             android:orientation="vertical">
             <TextView
@@ -33,24 +42,51 @@
                 android:text="Tên ca sỹ"
                 android:textAlignment="center"/>
         </LinearLayout>
+        <RelativeLayout
+            android:id="@+id/seekbarcontainner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_below="@id/song_infor"
+           >
+            <TextView
+                android:id="@+id/tv_time_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0:00"/>
+            <SeekBar
+                android:id="@+id/seekbar_progress"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/tv_time_start"
+                />
+            <TextView
+                android:id="@+id/tv_time_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/seekbar_progress"
+                android:text="99:99"/>
 
+        </RelativeLayout>
         <LinearLayout
             android:id="@+id/btn_service"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/song_infor"
+            android:layout_below="@+id/seekbarcontainner"
             android:gravity="center_horizontal"
             android:orientation="horizontal">
             <Button
                 android:id="@+id/btn_start_service"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Start"/>
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/ic_play"
+                />
             <Button
                 android:id="@+id/btn_stop_service"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Stop"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+
+                android:background="@drawable/ic_close"
                 android:layout_marginLeft="10dp"/>
         </LinearLayout>
 

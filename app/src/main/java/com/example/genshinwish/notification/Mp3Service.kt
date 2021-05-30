@@ -8,6 +8,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.media.MediaPlayer
+import android.net.Uri
 import android.os.Bundle
 import android.os.IBinder
 import android.util.Log
@@ -18,6 +19,7 @@ import com.example.genshinwish.MyReceiver
 import com.example.genshinwish.R
 import com.example.genshinwish.activities.SecondActivity
 import com.example.genshinwish.models.Song
+import java.lang.Exception
 
 class Mp3Service : Service() {
 
@@ -49,7 +51,7 @@ class Mp3Service : Service() {
             //sendNotification2()
         }
         //xử lý sự kiện cho notification
-        val actionMusic = intent?.getIntExtra("action_music_service",0)
+        val actionMusic = intent?.getIntExtra("action_music_service", 0)
         if (actionMusic != null) {
             handleActionMusic(actionMusic)
         }
@@ -66,7 +68,14 @@ class Mp3Service : Service() {
     }
 
     private fun startMusic(song: Song) {
-        mediaPlayer = MediaPlayer.create(applicationContext, song.resource)
+        // mediaPlayer = MediaPlayer.create(applicationContext, song.resource)
+        mediaPlayer = MediaPlayer()
+        try {
+            mediaPlayer?.setDataSource(song.url) //play audio in storage demo
+            mediaPlayer?.prepare()
+            mediaPlayer?.start()
+        } catch (e: Exception) {
+        }
         mediaPlayer.start()
         isPlaying = true
     }
@@ -119,13 +128,15 @@ class Mp3Service : Service() {
         //xử lý action click và view notification
         //Log.e("quyetkaito",isPlaying.toString())
         if (isPlaying) {
-            remoteViews.setOnClickPendingIntent(R.id.btn_play_or_pause, getPendingIntent(this, ACTION_PAUSE))
+            remoteViews.setOnClickPendingIntent(R.id.btn_play_or_pause,
+                getPendingIntent(this, ACTION_PAUSE))
             remoteViews.setImageViewResource(R.id.btn_play_or_pause, R.drawable.ic_pause)
         } else {
-            remoteViews.setOnClickPendingIntent(R.id.btn_play_or_pause, getPendingIntent(this,ACTION_RESUME))
+            remoteViews.setOnClickPendingIntent(R.id.btn_play_or_pause,
+                getPendingIntent(this, ACTION_RESUME))
             remoteViews.setImageViewResource(R.id.btn_play_or_pause, R.drawable.ic_play)
         }
-        remoteViews.setOnClickPendingIntent(R.id.btn_close, getPendingIntent(this,ACTION_CLEAR))
+        remoteViews.setOnClickPendingIntent(R.id.btn_close, getPendingIntent(this, ACTION_CLEAR))
         //end - xử lý action click
 
         val notify: Notification = NotificationCompat.Builder(this, CHANNEL_ID)
@@ -138,9 +149,12 @@ class Mp3Service : Service() {
     }
 
     private fun getPendingIntent(context: Context, action: Int): PendingIntent? {
-        val intent = Intent(this,MyReceiver::class.java)
-        intent.putExtra("action_music",action) //gửi cho Receiver giá trị của Action
-        return PendingIntent.getBroadcast(context.applicationContext,action,intent,PendingIntent.FLAG_UPDATE_CURRENT)
+        val intent = Intent(this, MyReceiver::class.java)
+        intent.putExtra("action_music", action) //gửi cho Receiver giá trị của Action
+        return PendingIntent.getBroadcast(context.applicationContext,
+            action,
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT)
     }
 
     override fun onDestroy() {
