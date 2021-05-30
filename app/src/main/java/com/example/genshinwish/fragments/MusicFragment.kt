@@ -17,6 +17,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.BaseAdapter
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -33,7 +34,7 @@ import kotlinx.android.synthetic.main.fragment_music.*
 import kotlinx.android.synthetic.main.layout_music_component.view.*
 
 
-class MusicFragment : Fragment() {
+class MusicFragment : Fragment(), SongRecyclerViewAdapter.OnItemClickListener {
     companion object{
         const val MY_PERMISSION_REQUEST = 1
         fun newInstance(): MusicFragment{
@@ -103,34 +104,16 @@ class MusicFragment : Fragment() {
                 Log.e("quyetkaito",listSongs[0].Title.toString())
             } while(rs.moveToNext())
         }
-        musicAdapter = MySongAdapter(listSongs)
+        //kiem tra ket qua thu duoc trong list
         for (i in listSongs){
             Log.e("quyetkaito",i.Title.toString())
         }
-//        txt_song_name.text = listSongs[0].Title.toString()
-//        txt_singer.text = listSongs[0].Author
-//
-        binding.rvSong.adapter = SongRecyclerViewAdapter(listSongs)
+        //
+        binding.rvSong.adapter = SongRecyclerViewAdapter(listSongs,this)
         binding.rvSong.layoutManager= LinearLayoutManager(context)
         binding.rvSong.setHasFixedSize(true)
-        //listMusic.adapter = musicAdapter //==> không  chạy
-       // musicAdapter!!.notifyDataSetChanged()
 
     }
-//    private fun isPermissionGranted():Boolean{
-//        return activity?.let { ContextCompat.checkSelfPermission(it,android.Manifest.permission.READ_EXTERNAL_STORAGE) } == PackageManager.PERMISSION_GRANTED
-//    }
-//    private fun enableReadStorage(){
-//        if (isPermissionGranted()){
-//            Log.e("quyetkaito","PERMISSION GRANTED")
-//            getMusic()
-//        }else{
-//            activity?.let {
-//                ActivityCompat.requestPermissions(it, arrayOf<String>(android.Manifest.permission.READ_EXTERNAL_STORAGE),
-//                    MY_PERMISSION_REQUEST)
-//            }
-//        }
-//    }
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -144,7 +127,13 @@ class MusicFragment : Fragment() {
         }
     }
 
-
+    override fun onItemClick(position: Int) {
+        Toast.makeText(context,"asdfad",Toast.LENGTH_SHORT).show()
+        //xử lý các thứ khác liên quan đến item ở đây :)
+        val clickedItem = listSongs[position]
+        binding.txtSongName.text = clickedItem.Title
+        binding.txtSinger.text = clickedItem.Author
+    }
 
     inner class MySongAdapter:BaseAdapter {
         var myListSong = ArrayList<SongInfo>()

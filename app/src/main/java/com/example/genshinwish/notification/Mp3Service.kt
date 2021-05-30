@@ -147,5 +147,6 @@ class Mp3Service : Service() {
         super.onDestroy()
         Log.e("quyetkaito", "Service onDestroy")
         mediaPlayer.release()
+
     }
 }
