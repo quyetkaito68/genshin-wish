@@ -7,10 +7,10 @@ import com.example.genshinwish.notification.Mp3Service
 
 class MyReceiver: BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
-        val actionMusic = intent?.getIntExtra("action_music",0)
+        val actionMusic = intent?.getIntExtra("action_music",0) //receiver nghe giá trị của action
         val intentService = Intent (context,Mp3Service::class.java)
         intentService.putExtra("action_music_service",actionMusic)
-        context?.startService(intentService)
+        context?.startService(intentService)  //start service với action nhận được từ notification
 
     }
 }

@@ -50,11 +50,12 @@ class Mp3Service : Service() {
             sendNotification(song)
             //sendNotification2()
         }
-        //xử lý sự kiện cho notification
+        //xử lý sự kiện cho notification start.
         val actionMusic = intent?.getIntExtra("action_music_service", 0)
         if (actionMusic != null) {
             handleActionMusic(actionMusic)
         }
+        //xử lý sự kiện cho notification end.
         return START_NOT_STICKY
     }
 
@@ -77,9 +78,7 @@ class Mp3Service : Service() {
             mediaPlayer?.start()
         } catch (e: Exception) {
         }
-        //mediaPlayer.start()
         isPlaying = true
-
     }
 
     private fun handleActionMusic(action: Int) {
@@ -96,6 +95,7 @@ class Mp3Service : Service() {
         }
     }
 
+    //hàm tiếp tục nhạc
     private fun resumeMusic() {
         if (mediaPlayer != null && !isPlaying) {
             mediaPlayer?.start()
@@ -104,6 +104,7 @@ class Mp3Service : Service() {
         }
     }
 
+    //hàm tạm dừng nhạc
     private fun pauseMusic() {
         if (mediaPlayer != null && isPlaying) {
             mediaPlayer?.pause()
@@ -128,7 +129,6 @@ class Mp3Service : Service() {
         remoteViews.setImageViewResource(R.id.btn_play_or_pause, R.drawable.ic_pause)
 
         //xử lý action click và view notification
-        //Log.e("quyetkaito",isPlaying.toString())
         if (isPlaying) {
             remoteViews.setOnClickPendingIntent(R.id.btn_play_or_pause,
                 getPendingIntent(this, ACTION_PAUSE))
@@ -141,7 +141,7 @@ class Mp3Service : Service() {
         remoteViews.setOnClickPendingIntent(R.id.btn_close, getPendingIntent(this, ACTION_CLEAR))
         //end - xử lý action click
 
-
+        //push notification
         val notify: Notification = NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentIntent(pendingIntent)
             .setSmallIcon(R.drawable.razor)
@@ -149,6 +149,7 @@ class Mp3Service : Service() {
             .setSound(null)
             .build()
         startForeground(1, notify)
+        // end - push notification
     }
 
     private fun getPendingIntent(context: Context, action: Int): PendingIntent? {

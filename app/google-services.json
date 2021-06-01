@@ -1,0 +1,126 @@
+{
+  "project_info": {
+    "project_number": "282075544179",
+    "project_id": "fir-ui-learning",
+    "storage_bucket": "fir-ui-learning.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:282075544179:android:33f988ee930229266f8806",
+        "android_client_info": {
+          "package_name": "com.example.android.firebaseui_login_sample"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "282075544179-ljn8s3qf9im4ang29kolk27226a6gg2t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFIiC8ZpUiqYuVppn7JET2xUBjb1Kjj6k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "282075544179-ljn8s3qf9im4ang29kolk27226a6gg2t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:282075544179:android:894bc410627db5fc6f8806",
+        "android_client_info": {
+          "package_name": "com.example.firebaseui"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "282075544179-ljn8s3qf9im4ang29kolk27226a6gg2t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFIiC8ZpUiqYuVppn7JET2xUBjb1Kjj6k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "282075544179-ljn8s3qf9im4ang29kolk27226a6gg2t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:282075544179:android:560669fda038b2a76f8806",
+        "android_client_info": {
+          "package_name": "com.example.genshinwish"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "282075544179-ljn8s3qf9im4ang29kolk27226a6gg2t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFIiC8ZpUiqYuVppn7JET2xUBjb1Kjj6k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "282075544179-ljn8s3qf9im4ang29kolk27226a6gg2t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:282075544179:android:1ab0c1178afc92716f8806",
+        "android_client_info": {
+          "package_name": "com.example.xocdia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "282075544179-ljn8s3qf9im4ang29kolk27226a6gg2t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFIiC8ZpUiqYuVppn7JET2xUBjb1Kjj6k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "282075544179-ljn8s3qf9im4ang29kolk27226a6gg2t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

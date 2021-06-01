@@ -60,7 +60,7 @@ class MusicFragment : Fragment(), SongRecyclerViewAdapter.OnItemClickListener {
         binding.btnStopService.setOnClickListener {
             clickStopService()
             btn_start_service.isEnabled = true
-            btn_start_service.setBackgroundResource(R.drawable.ic_play)
+            btn_start_service.setBackgroundResource(R.drawable.ic_play_arrow)
         }
         //request Permission start
         if (ActivityCompat.checkSelfPermission(requireContext(),
@@ -249,5 +249,6 @@ class MusicFragment : Fragment(), SongRecyclerViewAdapter.OnItemClickListener {
         isPlaying = true
 
     }
+
 }
 
