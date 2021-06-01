@@ -18,17 +18,18 @@ import com.example.genshinwish.MyApplication.Companion.CHANNEL_ID
 import com.example.genshinwish.MyReceiver
 import com.example.genshinwish.R
 import com.example.genshinwish.activities.SecondActivity
+import com.example.genshinwish.fragments.MusicFragment
 import com.example.genshinwish.models.Song
 import java.lang.Exception
 
 class Mp3Service : Service() {
 
-    lateinit var mediaPlayer: MediaPlayer
     var ACTION_PAUSE = 1
     var ACTION_RESUME = 2
     var ACTION_CLEAR = 3
     var isPlaying: Boolean = false
     lateinit var mSong: Song
+    var mediaPlayer: MediaPlayer?=null
 
 
     override fun onBind(intent: Intent?): IBinder? {
@@ -45,8 +46,7 @@ class Mp3Service : Service() {
         if (bundle != null) {
             val song = bundle.getSerializable("object_song") as Song
             mSong = song
-            Log.e("quyetkaito", song.title)
-            startMusic(song)
+            //startMusic(song)
             sendNotification(song)
             //sendNotification2()
         }
@@ -67,17 +67,19 @@ class Mp3Service : Service() {
         startForeground(1, notification)
     }
 
-    private fun startMusic(song: Song) {
+   private fun startMusic(song: Song) {
         // mediaPlayer = MediaPlayer.create(applicationContext, song.resource)
         mediaPlayer = MediaPlayer()
         try {
+            mediaPlayer?.isLooping=true
             mediaPlayer?.setDataSource(song.url) //play audio in storage demo
             mediaPlayer?.prepare()
             mediaPlayer?.start()
         } catch (e: Exception) {
         }
-        mediaPlayer.start()
+        //mediaPlayer.start()
         isPlaying = true
+
     }
 
     private fun handleActionMusic(action: Int) {
@@ -96,7 +98,7 @@ class Mp3Service : Service() {
 
     private fun resumeMusic() {
         if (mediaPlayer != null && !isPlaying) {
-            mediaPlayer.start()
+            mediaPlayer?.start()
             isPlaying = true
             sendNotification(mSong)  //phải gửi lại notification thì mới update dc view của notification
         }
@@ -104,7 +106,7 @@ class Mp3Service : Service() {
 
     private fun pauseMusic() {
         if (mediaPlayer != null && isPlaying) {
-            mediaPlayer.pause()
+            mediaPlayer?.pause()
             isPlaying = false
             sendNotification(mSong) //phải gửi lại notification thì mới update dc view của notification
         }
@@ -139,6 +141,7 @@ class Mp3Service : Service() {
         remoteViews.setOnClickPendingIntent(R.id.btn_close, getPendingIntent(this, ACTION_CLEAR))
         //end - xử lý action click
 
+
         val notify: Notification = NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentIntent(pendingIntent)
             .setSmallIcon(R.drawable.razor)
@@ -160,7 +163,7 @@ class Mp3Service : Service() {
     override fun onDestroy() {
         super.onDestroy()
         Log.e("quyetkaito", "Service onDestroy")
-        mediaPlayer.release()
+        mediaPlayer?.release()
 
     }
 }

@@ -6,10 +6,11 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.genshinwish.models.Song
 import com.example.genshinwish.models.SongInfo
 
 
-class SongRecyclerViewAdapter(private val listSong: ArrayList<SongInfo>, private val listener: OnItemClickListener):
+class SongRecyclerViewAdapter(private val listSong: ArrayList<Song>, private val listener: OnItemClickListener):
     RecyclerView.Adapter<SongRecyclerViewAdapter.MyViewHolder>(){
 
     interface OnItemClickListener{
@@ -39,8 +40,8 @@ class SongRecyclerViewAdapter(private val listSong: ArrayList<SongInfo>, private
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentSong = listSong[position]
-        holder.textview1.text  = currentSong.Title
-        holder.textview2.text = currentSong.Author
+        holder.textview1.text  = currentSong.title
+        holder.textview2.text = currentSong.singer
     }
 
     override fun getItemCount(): Int =  listSong.size

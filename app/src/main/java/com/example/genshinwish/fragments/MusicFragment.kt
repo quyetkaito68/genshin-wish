@@ -1,19 +1,21 @@
 package com.example.genshinwish.fragments
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Message
 import android.provider.MediaStore
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.Toast
+import android.widget.SeekBar
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,7 +23,6 @@ import com.example.genshinwish.R
 import com.example.genshinwish.SongRecyclerViewAdapter
 import com.example.genshinwish.databinding.FragmentMusicBinding
 import com.example.genshinwish.models.Song
-import com.example.genshinwish.models.SongInfo
 import com.example.genshinwish.notification.Mp3Service
 import kotlinx.android.synthetic.main.fragment_music.*
 import kotlinx.android.synthetic.main.layout_music_component.view.*
@@ -37,10 +38,11 @@ class MusicFragment : Fragment(), SongRecyclerViewAdapter.OnItemClickListener {
     }
 
     private lateinit var binding: FragmentMusicBinding
-    var listSongs = ArrayList<SongInfo>()
-    var musicAdapter: MySongAdapter? = null
-    var mp: MediaPlayer? = null
-    lateinit var urltmp: String
+    var listSongs = ArrayList<Song>()
+    var mediaPlayer: MediaPlayer? = null
+    var urltmp: String = ""
+    var durationtmp: Int = 0
+    var isPlaying: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,14 +54,15 @@ class MusicFragment : Fragment(), SongRecyclerViewAdapter.OnItemClickListener {
     ): View? {
         binding = FragmentMusicBinding.inflate(inflater)
         binding.btnStartService.setOnClickListener {
-
             clickStartService()
             btn_start_service.isEnabled = false
         }
         binding.btnStopService.setOnClickListener {
             clickStopService()
             btn_start_service.isEnabled = true
+            btn_start_service.setBackgroundResource(R.drawable.ic_play)
         }
+        //request Permission start
         if (ActivityCompat.checkSelfPermission(requireContext(),
                 Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
         ) {
@@ -69,16 +72,38 @@ class MusicFragment : Fragment(), SongRecyclerViewAdapter.OnItemClickListener {
             Log.e("quyetkaito", "Permission granted")
             getMusic()
         }
+        //request Permission end
+
 
         return binding.root
+    }
+
+    private fun createTimeLabel(time: Int): String {
+        var timeLabel = ""
+        var min = time / 1000 / 60
+        var sec = time / 1000 % 60
+        timeLabel = "$min:"
+        if (sec < 10) timeLabel += "0"
+        timeLabel += sec
+        return timeLabel
     }
 
     private fun clickStopService() {
         val intent = Intent(activity, Mp3Service::class.java)
         requireActivity().stopService(intent)
+        mediaPlayer?.release()
     }
 
     private fun clickStartService() {
+        // set default music start
+        if (urltmp.equals("")) {
+            urltmp = listSongs[listSongs.size - 1].url
+            binding.txtSongName.text = listSongs[listSongs.size - 1].title
+            binding.txtSinger.text = listSongs[listSongs.size - 1].singer
+            startMusic(listSongs[listSongs.size - 1])
+        }
+        // set default music end
+
         val intent = Intent(activity, Mp3Service::class.java)
         val bundle = Bundle()
 //        val song = Song("Genshin Impact Battle Song","Paimon",
@@ -88,7 +113,9 @@ class MusicFragment : Fragment(), SongRecyclerViewAdapter.OnItemClickListener {
             binding.txtSinger.text.toString(),
             R.drawable.razor,
             R.raw.battle_paimon,
-            urltmp)
+            urltmp, durationtmp)
+
+
         bundle.putSerializable("object_song", song2)
         intent.putExtra("Bundle", bundle)
         requireActivity().startService(intent)
@@ -101,19 +128,20 @@ class MusicFragment : Fragment(), SongRecyclerViewAdapter.OnItemClickListener {
         if (rs != null && rs.moveToFirst()) {
             do {
                 var url = rs.getString(rs.getColumnIndex(MediaStore.Audio.Media.DATA))
-                Log.e("quyetkaito", url)
+                // Log.e("quyetkaito", url)
                 var author = rs.getString(rs.getColumnIndex(MediaStore.Audio.Media.ARTIST))
-                Log.e("quyetkaito", author)
+                //Log.e("quyetkaito", author)
                 var title = rs.getString(rs.getColumnIndex(MediaStore.Audio.Media.DISPLAY_NAME))
-                Log.e("quyetkaito", title)
-                listSongs.add(SongInfo(title, author, url))
+                // Log.e("quyetkaito", title)
+                var duration = rs.getInt(rs.getColumnIndex(MediaStore.Audio.Media.DURATION))
+                listSongs.add(Song(title, author, R.drawable.razor, null, url, duration))
             } while (rs.moveToNext())
         }
         //kiem tra ket qua thu duoc trong list
         for (i in listSongs) {
-            Log.e("quyetkaito", i.Title.toString())
+            Log.e("quyetkaito", i.title)
         }
-        //
+        //setup RecyclerView Adapter
         binding.rvSong.adapter = SongRecyclerViewAdapter(listSongs, this)
         binding.rvSong.layoutManager = LinearLayoutManager(context)
         binding.rvSong.setHasFixedSize(true)
@@ -136,38 +164,89 @@ class MusicFragment : Fragment(), SongRecyclerViewAdapter.OnItemClickListener {
         //Toast.makeText(context,"asdfad",Toast.LENGTH_SHORT).show()
         //xử lý các thứ khác liên quan đến item ở đây :)
         val clickedItem = listSongs[position]
-        binding.txtSongName.text = clickedItem.Title
-        binding.txtSinger.text = clickedItem.Author
-        urltmp = clickedItem.SongURL.toString()
+        //set current song display start
+        binding.txtSongName.text = clickedItem.title
+        binding.txtSinger.text = clickedItem.singer
+        urltmp = clickedItem.url
+        durationtmp = clickedItem.duration
+        binding.tvTimeEnd.text = createTimeLabel(durationtmp)
+        if (mediaPlayer?.isPlaying == true) {
+            mediaPlayer?.release()
+            startMusic(clickedItem)
+        } else {
+            startMusic(clickedItem)
+        }
+        clickStartService()
+        binding.btnStartService.setBackgroundResource(R.drawable.ic_pause)
+        //set current song display end
 
+        //seekbar process
+        if (mediaPlayer?.isPlaying == true) {
+            binding.seekbarProgress.max = durationtmp
+            binding.seekbarProgress.setOnSeekBarChangeListener(
+                object : SeekBar.OnSeekBarChangeListener {
+                    override fun onProgressChanged(
+                        seekBar: SeekBar?,
+                        progress: Int,
+                        fromUser: Boolean,
+                    ) {
+                        if (fromUser) {
+                            mediaPlayer?.seekTo(progress)
+                        }
+                    }
+
+                    override fun onStartTrackingTouch(seekBar: SeekBar?) {
+
+                    }
+
+                    override fun onStopTrackingTouch(seekBar: SeekBar?) {
+
+                    }
+
+                }
+            )
+
+            Thread(Runnable {
+                while (mediaPlayer != null) {
+                    try {
+                        var msg = Message()
+                        msg.what = mediaPlayer?.currentPosition!!
+                        handler.sendMessage(msg)
+                        Thread.sleep(1000)
+                    } catch (e: InterruptedException) {
+                    }
+                }
+            }).start()
+
+        }//seekbar progress end
     }
 
-    inner class MySongAdapter : BaseAdapter {
-        var myListSong = ArrayList<SongInfo>()
+    @SuppressLint("HandlerLeak")
+    var handler = object : Handler() {
+        override fun handleMessage(msg: Message) {
+            var currentPosition = msg.what
+            //update progress
+            binding.seekbarProgress.progress = currentPosition
+            //update labels
+            var elapsedTime = createTimeLabel(currentPosition)
+            binding.tvTimeStart.text = elapsedTime
 
-        constructor(myListSong: ArrayList<SongInfo>) : super() {
-            this.myListSong = myListSong
+            var remainingTime = createTimeLabel(durationtmp - currentPosition)
+            binding.tvTimeEnd.text = remainingTime
         }
+    }
 
-        override fun getCount(): Int {
-            return myListSong.size
+    private fun startMusic(song: Song) {
+        // mediaPlayer = MediaPlayer.create(applicationContext, song.resource)
+        mediaPlayer = MediaPlayer()
+        try {
+            mediaPlayer?.isLooping = true
+            mediaPlayer?.setDataSource(song.url) //play audio in storage demo
+            mediaPlayer?.prepare()
+            mediaPlayer?.start()
+        } catch (e: Exception) {
         }
-
-        override fun getItem(position: Int): Any {
-            return myListSong[position]
-        }
-
-        override fun getItemId(position: Int): Long {
-            return position.toLong()
-        }
-
-        override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-            var myview = layoutInflater.inflate(R.layout.layout_music_component, null)
-            var song = myListSong[position]
-            myview.textview1.text = song.Title
-            myview.textview2.text = song.Author
-            return myview
-        }
+        isPlaying = true
 
     }
 }
