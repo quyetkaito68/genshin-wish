@@ -16,4 +16,11 @@
     <string name="home_fragment">This is Home Fragment</string>
     <string name="music_fragment">This is music fragment</string>
     <string name="public_fragment">This is public Fragment</string>
+    <string name="preference_fact_type_key">fact_type_pref</string>
+    <string name="fact_type_android">Android</string>
+    <string name="fact_type_california">California</string>
+    <string name="login_btn">Login</string>
+    <string name="logout_button_text">Logout</string>
+    <string name="login_button_text">Login</string>
+    <string name="welcome_message_authed">Hi %1$s! Did you know that %2$s.</string>
 </resources>
