@@ -231,8 +231,8 @@ class MusicFragment : Fragment(), SongRecyclerViewAdapter.OnItemClickListener {
             var elapsedTime = createTimeLabel(currentPosition)
             binding.tvTimeStart.text = elapsedTime
 
-            var remainingTime = createTimeLabel(durationtmp - currentPosition)
-            binding.tvTimeEnd.text = remainingTime
+//            var remainingTime = createTimeLabel(durationtmp - currentPosition)
+//            binding.tvTimeEnd.text = remainingTime
         }
     }
 

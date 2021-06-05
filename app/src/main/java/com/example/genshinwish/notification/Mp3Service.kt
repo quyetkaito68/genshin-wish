@@ -164,7 +164,5 @@ class Mp3Service : Service() {
     override fun onDestroy() {
         super.onDestroy()
         Log.e("quyetkaito", "Service onDestroy")
-        mediaPlayer?.release()
-
     }
 }

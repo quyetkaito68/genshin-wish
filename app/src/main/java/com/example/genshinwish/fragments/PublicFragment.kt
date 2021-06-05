@@ -12,10 +12,14 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.example.genshinwish.LoginViewModel
 import com.example.genshinwish.R
+import com.example.genshinwish.UserAdapter
 import com.example.genshinwish.databinding.FragmentPublicBinding
+import com.example.genshinwish.models.User
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
+import kotlinx.android.synthetic.main.fragment_public.*
 
 
 class PublicFragment : Fragment() {
@@ -30,6 +34,13 @@ class PublicFragment : Fragment() {
 
     private val viewModel by viewModels<LoginViewModel>()
     private lateinit var binding: FragmentPublicBinding
+    //database test
+    private lateinit var db: DatabaseReference
+    private var userId: String? = null
+    private val data: MutableList<User> = mutableListOf()
+    private lateinit var adapter: UserAdapter
+    private val USER_NODE = "users"
+    //
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +53,16 @@ class PublicFragment : Fragment() {
         binding = FragmentPublicBinding.inflate(inflater)
         binding.welcomeText.text = viewModel.getFactToDisplay(requireContext())
         binding.authButton.text = getString(R.string.login_btn)
+        db = FirebaseDatabase.getInstance().getReference(USER_NODE)
+
+        binding.btnIn.setOnClickListener {
+            createUser()
+        }
+
+        adapter = UserAdapter(requireContext(), R.layout.fragment_public, data)
+        binding.lvUser.adapter = adapter
+
+        getUser()
         return binding.root
     }
 
@@ -119,6 +140,37 @@ class PublicFragment : Fragment() {
                 Log.i(TAG, "Sign in unsuccessful ${response?.error?.errorCode}")
             }
         }
+    }
+
+    private fun getUser() {
+        db.addChildEventListener(object : ChildEventListener {
+            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                val user = snapshot.getValue(User::class.java)
+                data.add(user!!)
+
+                adapter.notifyDataSetChanged()
+            }
+
+            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+            }
+
+            override fun onChildRemoved(snapshot: DataSnapshot) {
+            }
+
+            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+
+        })
+    }
+
+    private fun createUser() {
+        userId = db.push().key
+
+        val user = User(edt_name.text.toString(), edt_email.text.toString())
+        db.child(userId.toString()).setValue(user)
     }
 
 }

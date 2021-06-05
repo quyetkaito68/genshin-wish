@@ -23,4 +23,7 @@
     <string name="logout_button_text">Logout</string>
     <string name="login_button_text">Login</string>
     <string name="welcome_message_authed">Hi %1$s! Did you know that %2$s.</string>
+    <string name="email">Email</string>
+    <string name="name">Name</string>
+    <string name="btn_in">IN</string>
 </resources>
