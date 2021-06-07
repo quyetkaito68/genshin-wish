@@ -26,4 +26,8 @@
     <string name="email">Email</string>
     <string name="name">Name</string>
     <string name="btn_in">IN</string>
+    <string name="button_logout_text">Logout</string>
+    <string name="button_login_text">Login</string>
+    <string name="button_save">Save</string>
+    <string name="button_login">Login</string>
 </resources>
